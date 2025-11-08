@@ -1,0 +1,107 @@
+:root {
+    --bg: #ffffff;
+    --fg: #e9eef7;
+    --muted: #98a2b3;
+    --card: #121a2b;
+    --line: #1f2a44;
+    --accent: #5b8cff;
+    --r: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-sans-serif, system-ui, "Apple SD Gothic Neo", "Segoe UI", Roboto, Arial;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0 0 10px 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.section {
+    margin: 20px 0;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 16px;
+    margin-top: 10px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: #0d1526;
+    color: var(--fg);
+    margin-top: 8px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 16px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.chip {
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--fg);
+    cursor: pointer;
+}
+
+.chip.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+.progress {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.bar {
+    width: 20px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--line);
+}
+
+.bar.active {
+    background: var(--accent);
+}
