@@ -1,7 +1,6 @@
 // src/App.js
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import OnboardingStart from './components/ui/OnboardingStart';
 import ProfileInput from './components/ui/ProfileInput';
 import PeriodSetup from './components/ui/PeriodSetup';
 import SymptomSensitivitySetup from './components/ui/SymptomSensitivitySetup';
@@ -16,10 +15,9 @@ export default function App() {
   );
 
   useEffect(() => {
-    const refresh = () => setHasOnboarded(!!localStorage.getItem('onboarding_v1'));
-    // 다른 탭에서 변경되는 경우
+    const refresh = () =>
+      setHasOnboarded(!!localStorage.getItem('onboarding_v1'));
     window.addEventListener('storage', refresh);
-    // 같은 탭에서 완료 신호 받기
     window.addEventListener('onboarding:done', refresh);
     return () => {
       window.removeEventListener('storage', refresh);
@@ -28,26 +26,26 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {!hasOnboarded ? (
-          <>
-            <Route path="/" element={<OnboardingStart />} />
-            <Route path="/profile" element={<ProfileInput />} />
-            <Route path="/period" element={<PeriodSetup />} />
-            <Route path="/sensitivity" element={<SymptomSensitivitySetup />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<Home />} />
-            <Route path="/daily" element={<DailyCheck />} />
-            <Route path="/craving" element={<CravingQuickPick />} />
-            <Route path="/recommend" element={<RecommendationScreen />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </>
-        )}
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      {!hasOnboarded ? (
+        <>
+          {/* 온보딩 첫 화면은 SymptomSensitivitySetup */}
+          <Route path="/" element={<SymptomSensitivitySetup />} />
+          <Route path="/sensitivity" element={<SymptomSensitivitySetup />} />
+          {/* 세부 온보딩 단계용 (선택적으로 유지) */}
+          <Route path="/profile" element={<ProfileInput />} />
+          <Route path="/period" element={<PeriodSetup />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<Home />} />
+          <Route path="/dailycheck" element={<DailyCheck />} />
+          <Route path="/craving" element={<CravingQuickPick />} />
+          <Route path="/recommend" element={<RecommendationScreen />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </>
+      )}
+    </Routes>
   );
 }
